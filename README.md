@@ -1,6 +1,17 @@
-# BAKED-BY-THE-CRATER
+<div align="center">
+
+# **BAKED-BY-THE-CRATER**
 
 *Bake Innovation Into Every Slice of Success*
+
+<!-- Badges -->
+
+![PHP](https://img.shields.io/badge/PHP-8%2B-blue)
+![Composer](https://img.shields.io/badge/Composer-Required-orange)
+![MySQL](https://img.shields.io/badge/MySQL-Database-informational)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+</div>
 
 ---
 
@@ -24,11 +35,11 @@
 
 This project empowers developers to build secure, scalable, and engaging online bakery stores. The core features include:
 
-* 🔐 **User Authentication**: Secure login, email verification, Google Sign-In, and password reset workflows.
-* 🧾 **XML Data Handling**: Manage carts, orders, and product data efficiently with structured XML utilities.
-* 📊 **Admin Dashboard**: Oversee products, orders, users, and analytics with an intuitive interface.
-* ⚡ **Real-time Chat**: Enhance customer support with live messaging and conversation persistence.
-* 🧩 **Modular Architecture**: Reusable PHP components for database connections, email notifications, and session management.
+* 🔐 **User Authentication** – Secure login, email verification, Google Sign-In, and password reset workflows.
+* 🧾 **XML Data Handling** – Manage carts, orders, and product data efficiently with structured XML utilities.
+* 📊 **Admin Dashboard** – Oversee products, orders, users, and analytics with an intuitive interface.
+* ⚡ **Real-time Chat** – Enhance customer support with live messaging and conversation persistence.
+* 🧩 **Modular Architecture** – Reusable PHP components for database connections, email notifications, and session management.
 
 ---
 
@@ -47,19 +58,19 @@ This project requires the following dependencies:
 
 Build **Baked-by-the-Crater** from the source and install dependencies:
 
-1. **Clone the repository**
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/your-username/baked-by-the-crater
    ```
 
-2. **Navigate to the project directory**
+2. Navigate to the project directory:
 
    ```bash
    cd baked-by-the-crater
    ```
 
-3. **Install the dependencies**
+3. Install the dependencies:
 
    ```bash
    composer install
@@ -79,4 +90,4 @@ Run functional and integration tests to ensure system stability. Verify authenti
 
 ---
 
-© 2025 Baked-by-the-Crater. All rights reserved.
+© 2025 **Baked-by-the-Crater**. All rights reserved.
