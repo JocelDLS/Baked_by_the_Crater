@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<products>
+    <product id="1">
+        <name>Chocolate Cake</name>
+        <price>850</price>
+        <stock>14</stock>
+        <category>Cakes</category>
+    <description>Indulge in a slice of pure bliss with our Decadent Dark Chocolate Dream Cake. This is more than just a cake; it's a rich, luxurious experience designed for the ultimate chocolate lover.</description><image_path>uploads/product_1765685665_693e39a1912ca.jpg</image_path></product>
+    <product id="2">
+        <name>Red Velvet Cupcake</name>
+        <price>120</price>
+        <stock>49</stock>
+        <category>Bread</category>
+    <description/><image_path/></product>
+    <product id="3">
+        <name>Lemon Bars</name>
+        <price>45.00</price>
+        <stock>50</stock>
+        <category>Pastries</category>
+    </product>
+    <product id="4">
+        <name>Blueberry Cheesecake</name>
+        <price>1200</price>
+        <stock>48</stock>
+        <category>Cakes</category>
+    <description>Savor the exquisite balance of creamy decadence and bright, fruity notes with our Heavenly Blueberry Cheesecake. It's the perfect dessert for those who appreciate classic richness elevated by a burst of fresh flavor.</description><image_path>uploads/product_1765702966_693e7d364db3b.jpg</image_path></product>
+<product id="5"><name>Zesty Lemon Raspberry Delight</name><description>A bright and airy dessert featuring layers of moist lemon sponge cake infused with fresh zest. Filled with a tangy raspberry curd and frosted with a delicate, tart lemon cream cheese icing. It's sunshine in every slice!</description><price>1850</price><stock>50</stock><category>Cakes</category><image_path>uploads/product_1765703194_693e7e1a509f9.jpg</image_path></product><product id="6"><name>Classic Strawberry Shortcake</name><description>A timeless favorite featuring tender vanilla shortcake layers, filled with fresh, sliced strawberries macerated in their own syrup. Generously blanketed in light, sweetened whipped cream. Simple, fresh, and irresistible.</description><price>1700</price><stock>20</stock><category>Cakes</category><image_path>uploads/product_1765703362_693e7ec2e4e0b.jpg</image_path></product></products>

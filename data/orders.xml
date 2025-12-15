@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orders>
+
+    <order id="1" status="completed">
+        <user_id>1</user_id>
+        <order_date>2025-10-14 03:09:31</order_date>
+        <total_amount>2,225.00</total_amount>
+
+        <items>
+            <item product_id="1">
+                <product_name>Chocolate Cake</product_name>
+                <unit_price>850.00</unit_price>
+                <quantity>1</quantity>
+            </item>
+
+            <item product_id="2">
+                <product_name>Red Velvet Cupcake</product_name>
+                <unit_price>120.00</unit_price>
+                <quantity>1</quantity>
+            </item>
+
+            <item product_id="3">
+                <product_name>Lemon Bars</product_name>
+                <unit_price>45.00</unit_price>
+                <quantity>1</quantity>
+            </item>
+
+            <item product_id="4">
+                <product_name>Blueberry Cheesecake</product_name>
+                <unit_price>1,200.00</unit_price>
+                <quantity>1</quantity>
+            </item>
+        </items>
+    </order>
+
+    <order id="2" status="completed">
+        <user_id>1</user_id>
+        <order_date>2025-11-14 03:24:52</order_date>
+        <total_amount>2,300.00</total_amount>
+
+        <items>
+            <item product_id="1">
+                <product_name>Chocolate Cake</product_name>
+                <unit_price>850.00</unit_price>
+                <quantity>1</quantity>
+            </item>
+
+            <item product_id="4">
+                <product_name>Blueberry Cheesecake</product_name>
+                <unit_price>1,200.00</unit_price>
+                <quantity>1</quantity>
+            </item>
+
+            <item product_id="2">
+                <product_name>Red Velvet Cupcake</product_name>
+                <unit_price>120.00</unit_price>
+                <quantity>2</quantity>
+            </item>
+        </items>
+    </order>
+
+    <order id="3" status="completed">
+        <user_id>1</user_id>
+        <order_date>2025-12-14 04:14:42</order_date>
+        <total_amount>3,380.00</total_amount>
+
+        <items>
+            <item product_id="1">
+                <product_name>Chocolate Cake</product_name>
+                <unit_price>850.00</unit_price>
+                <quantity>1</quantity>
+            </item>
+
+            <item product_id="4">
+                <product_name>Blueberry Cheesecake</product_name>
+                <unit_price>1,200.00</unit_price>
+                <quantity>2</quantity>
+            </item>
+
+            <item product_id="2">
+                <product_name>Red Velvet Cupcake</product_name>
+                <unit_price>120.00</unit_price>
+                <quantity>1</quantity>
+            </item>
+        </items>
+    </order>
+
+</orders>

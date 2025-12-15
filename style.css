@@ -1,0 +1,2386 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-main: #2C1A0D; /* Deep Chocolate Brown */
+    --accent: #A0522D; /* Rich Sienna/Crust Brown */
+    --accent-soft: #F5DEB3; /* Wheat/Creamy Dough (Replaces Tan) */
+    --text-main: #f7f5f0;
+    --text-muted: #b1b1bd;
+    --input-bg: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(160, 82, 45, 0.3); /* Transparent Crust Brown */
+    --box-bg: rgba(44, 26, 13, 0.96); /* Darker box bg */
+    /* Backwards-compatible aliases used across the stylesheet */
+    --primary-color: var(--accent);
+    --secondary-color: var(--accent-soft);
+    --danger-color: #dc3545;
+    --success-color: #4ade80;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit; /* All elements inherit the border-box model */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    /* Updated background to a warm, deep chocolate gradient */
+    background: radial-gradient(circle at top left, #4A2E1A 0, #2C1A0D 55%);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* FIX: Added for full-page layout */
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* FIX: Removed padding from body to let header/footer span full width */
+}
+
+/* --- Container Utility --- */
+.container {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+}
+
+/* --- Box & Header Styles (Used on Login/Register/Verify) --- */
+.login-box, .register-box, .status-box {
+    width: min(450px, 90vw);
+    background: var(--box-bg);
+    border-radius: 24px;
+    padding: 24px 26px;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--border-color);
+}
+
+.status-box {
+    /* Styles specific to verification page */
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.brand {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent); /* Crust Brown */
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+/* --- Form Elements --- */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-group-row .form-group {
+    margin-bottom: 0;
+    flex: 1;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="tel"],
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--accent-soft); /* Creamy Dough */
+    box-shadow: 0 0 0 1px var(--accent); /* Crust Brown */
+}
+
+.required {
+    color: #f87171; /* A soft red for required marks */
+    margin-left: 2px;
+}
+
+/* Action Links (e.g., Forgot Password) */
+.action-links {
+    text-align: right;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.action-links a {
+    color: var(--accent-soft);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.action-links a:hover {
+    color: var(--accent);
+}
+
+/* --- Buttons --- */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    border-radius: 999px;
+    border: none;
+    /* Updated gradient: Crust Brown to Caramel */
+    background: linear-gradient(135deg, var(--accent) 0%, #D2B48C 100%);
+    color: #120f08; /* Very dark text for better contrast */
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+/* --- ADDED/CONSOLIDATED BUTTON STYLES FOR PROFILE PAGE --- */
+
+/* Tertiary Button (Used for 'Logout', 'Go Home') */
+.btn-tertiary {
+    /* MODIFIED: Ensures it renders as a transparent outline button on dark backgrounds */
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 999px;
+    border: 1px solid var(--accent); /* Rich Sienna/Crust Brown border */
+    background: transparent;
+    color: var(--accent-soft); /* Wheat/Creamy Dough text color for visibility */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, color 0.2s;
+    text-align: center;
+}
+
+.btn-tertiary:hover {
+    background: var(--accent); /* Solid fill on hover */
+    color: var(--text-main); /* White text on hover */
+}
+
+
+/* ---------------------------------------------------------------------- */
+
+
+.sso-buttons {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* --- Divider --- */
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+.divider span {
+    background: var(--box-bg);
+    padding: 0 10px;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Footer Links and Alerts --- */
+.footer-link, .login-link {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 15px;
+}
+
+.footer-link a, .login-link a, .checkbox-label a {
+    color: var(--accent-soft); /* Creamy Dough */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.footer-link a:hover, .login-link a:hover, .checkbox-label a:hover {
+    color: var(--accent); /* Crust Brown */
+}
+
+.alert {
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    max-width: 800px; /* Constrain width for better reading */
+    border: 1px solid transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.alert p {
+    margin: 0;
+    flex-grow: 1;
+}
+
+/* Success Alert (Green/Soft Accent) */
+.alert-success {
+    background-color: rgba(160, 200, 45, 0.15); /* Light green tint */
+    border-color: #A0C82D; /* Vibrant Green */
+    color: #A0C82D; /* Green text */
+}
+
+/* Error Alert (Red/Warning) */
+.alert-error {
+    background-color: rgba(220, 53, 69, 0.15); /* Light red tint */
+    border-color: #dc3545; /* Vibrant Red */
+    color: #dc3545; /* Red text */
+}
+
+.alert .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: inherit; /* Inherit color from alert */
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.alert .close-btn:hover {
+    opacity: 1;
+}
+
+/* General Error Message Styling (e.g., used on profile.php) */
+.error-message {
+    color: var(--text-main); /* Keep text visible */
+    background-color: var(--bg-main); /* Use main dark background */
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #dc3545; /* Highlight box with error color */
+    margin-top: 20px;
+}
+
+.error-message h2 {
+    color: #dc3545; /* Make the title red */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* --- Checkbox Group --- */
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    margin-top: 4px;
+    width: auto;
+}
+
+.checkbox-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+/* --- Verification Page Specific Styles (status-box) --- */
+.status-box h1 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.status-box p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+.status {
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.status.success {
+    color: #4ade80;
+}
+
+.status.error {
+    color: #f87171;
+}
+
+/* REMOVED: Conflicting generic 'a.btn' style was here */
+
+/* ======================================================= */
+/* --- HOMEPAGE & GENERAL LAYOUT STYLES (homepage.php) --- */
+/* ======================================================= */
+
+main {
+    width: 100%;
+    flex-grow: 1; /* Allow main content to take up space between header/footer */
+}
+
+section {
+    padding: 60px 0;
+}
+
+h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--accent-soft);
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* --- Header & Navigation --- */
+.main-header {
+    width: 100%;
+    background: var(--box-bg);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    /* ADJUSTED: Increased padding for a taller header to fit the bigger logo */
+    padding: 20px 0; 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header .logo {
+    display: inline-flex; 
+    align-items: center;
+}
+
+.main-header .site-logo {
+    /* CHANGED: Logo height increased from 40px to 80px */
+    height: 80px; 
+    width: auto;
+    transition: opacity 0.3s ease;
+}
+
+/* NEW: Added style for the logo text to balance with the large image */
+.main-header .logo a {
+    color: var(--accent-soft);
+    text-decoration: none;
+    font-size: 1.5rem; 
+    font-weight: 700;
+    margin-left: 10px; /* Space between image and text */
+}
+
+.main-header .logo a:hover .site-logo {
+    opacity: 0.9;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.main-nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--accent-soft);
+}
+
+.main-nav a.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 1px;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Secondary Button (Used for Login/Sign Up) */
+.btn-secondary {
+    padding: 8px 16px;
+    border: 1px solid var(--accent);
+    color: var(--accent-soft);
+    background: transparent;
+    text-decoration: none;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover {
+    background: var(--accent);
+    color: var(--bg-main);
+}
+
+.cart-icon {
+    position: relative;
+    color: var(--text-main);
+    font-size: 1.3rem;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: #e76c6c; /* A slight red for notification */
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    /* FIX: Reduce top/bottom padding to give us more control with min-height */
+    padding: 40px 0 60px;
+    background-image: url('images/Background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; 
+    /* Tweak: Keep a roomy hero but slightly smaller for better fold balance */
+    min-height: 640px; 
+    display: flex;
+    /* Align items to start so content sits in the sky area of the background */
+    align-items: flex-start;
+    color: #fff;
+}
+
+.hero-content {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: flex-start; 
+    gap: 50px;
+    /* FIX: Increase padding-top significantly to push the text down into the sky area */
+    padding-top: 100px; 
+    /* NEW: Slightly adjust horizontal placement to the left */
+    padding-left: 80px; 
+}
+
+/* Hero typography and CTA polish */
+.hero-text h1 {
+    font-size: 3.6rem;
+    line-height: 1.03;
+    letter-spacing: -0.4px;
+    margin-bottom: 10px;
+    text-shadow: 0 8px 30px rgba(0,0,0,0.45);
+}
+.hero-text p { color: rgba(255,255,255,0.92); font-size: 1.05rem; max-width: 680px; }
+.hero-ctas { display:flex; gap:12px; margin-top:18px; }
+.hero-ctas .btn { padding: 12px 20px; border-radius: 12px; font-weight:700; box-shadow: 0 10px 28px rgba(0,0,0,0.28); }
+.hero-ctas .btn-primary { background: linear-gradient(90deg, #ffd9b3, #ffb366); color: #120f08; }
+.hero-ctas .btn-tertiary { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.95); }
+
+/* Featured products tweaks (index) */
+.featured-products { padding: 30px 0 50px; }
+.featured-products .product-card { border-radius: 14px; overflow: hidden; transition: transform 0.28s ease, box-shadow 0.28s ease; }
+.featured-products .product-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 24px 60px rgba(0,0,0,0.28); }
+.featured-products .product-image { transition: transform 0.5s ease; }
+.featured-products .product-card:hover .product-image { transform: scale(1.06); }
+.featured-products .product-card h3 { font-size: 1.1rem; margin: 12px 0 6px; }
+.featured-products .product-card .price-badge { top: 12px; right: 12px; font-size: 1rem; }
+.featured-products .product-details { display:flex; flex-direction:column; }
+.featured-products .price-action { margin-top: auto; }
+
+/* In style.css, around line 428 */
+.hero-text {
+    /* FIX: Set width to ensure it stays on the left half of the image */
+    width: 45%; 
+    max-width: 550px; /* Keep a maximum width constraint */
+}
+
+/* In style.css, find the .hero-text h1 block (around line 431) */
+.hero-text h1 {
+    /* Color intentionally left to inherit so hero section can control it */
+}
+
+.hero-text p {
+    /* Keep paragraph weight but allow color inheritance from the hero */
+    font-weight: 500;
+}
+.hero-ctas {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.hero-ctas .btn-primary {
+    width: auto;
+    margin-top: 0;
+}
+
+/* REMOVED: Conflicting .btn-tertiary style was here */
+
+/* --- Featured Products --- */
+.featured-products {
+    background: linear-gradient(to bottom, #4A2E1A 0%, var(--bg-main) 100%);
+}
+
+.product-grid {
+    display: grid;
+    /* Ginagarantiyahan na ang bawat column ay may minimum na 300px width.
+       Hindi ito lalampas sa 1fr para pantay-pantay pa rin. */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 30px; /* Space sa pagitan ng cards */
+    padding: 20px 0;
+}
+
+/* Ensure card size is maintained */
+.product-card {
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex; /* Gawing flex para madali kontrolin ang content */
+    flex-direction: column;
+    height: 100%; /* Ensure all cards in a row are the same height */
+    /* Maaari rin nating i-set ang isang fixed width dito kung hindi gumana ang grid sa itaas: */
+    /* width: 100%; */
+}
+
+.product-card {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card:hover {
+    box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+}
+
+.product-card .image-container { /* Pwede ring .product-card img, depende sa structure */
+    /* I-set ang aspect ratio na 4:3 para consistent ang taas */
+    aspect-ratio: 4 / 3; 
+    width: 100%; 
+    overflow: hidden; /* Siguraduhin na hindi lalabas ang image */
+}
+
+.product-card .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Siguraduhin na punong-puno ang container nang walang distortion */
+    display: block;
+}
+
+/* New: styles for product images when set via background-image or <img> fallback */
+.product-image {
+    width: 100%;
+    aspect-ratio: 4 / 3; /* Keep consistent heights across cards */
+    background-color: var(--accent-soft); /* placeholder */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative; /* for overlay */
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Price badge on top-right of the image */
+.price-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(90deg, rgba(160,82,45,1), rgba(210,180,140,1));
+    color: #120f08;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 800;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    font-size: 0.9rem;
+}
+
+/* Subtle image vignette for better contrast */
+.product-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.08));
+    pointer-events: none;
+}
+
+/* Improve CTA button appearance */
+.btn-small {
+    background: linear-gradient(90deg, rgba(255,255,255,0.92), rgba(248,243,238,0.95));
+    color: #120f08;
+    border-radius: 12px;
+    padding: 10px 18px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn-small:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+/* Make the price text inside details stand out more */
+.price-action .price {
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 1.18rem;
+}
+
+/* Ensure product details take remaining height and price/actions sit at bottom */
+.product-details {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.price-action {
+    margin-top: auto; /* push actions to the bottom */
+}
+
+/* Out-of-stock visual overlay on image */
+.product-card.out-of-stock .product-image::after {
+    content: 'Out of Stock';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 8px 12px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+}
+
+.product-card.out-of-stock .product-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35));
+}
+
+.btn-disabled {
+    background: rgba(255,255,255,0.06);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+.product-card h3 {
+    color: var(--accent-soft);
+}
+
+.product-card .price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 15px;
+}
+
+/* REMOVED: Conflicting .btn-small style was here */
+
+
+/* --- USP Section --- */
+.usp-section {
+    background: var(--bg-main);
+}
+
+.usp-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    text-align: center;
+}
+
+.usp-item {
+    flex: 1;
+    max-width: 300px;
+    padding: 20px;
+    background: rgba(160, 82, 45, 0.1); /* Light crust brown background */
+    border-radius: 12px;
+}
+
+.usp-item i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 15px;
+}
+
+.usp-item h3 {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.usp-item p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* --- Testimonials --- */
+.testimonials {
+    background: #4A2E1A; /* Slightly lighter shade for contrast */
+    text-align: center;
+}
+
+.testimonial-box {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px;
+    background: var(--box-bg);
+    border-radius: 16px;
+    border-left: 5px solid var(--accent);
+}
+
+.testimonial-box p {
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--accent-soft);
+}
+
+.testimonial-box footer {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 10px;
+}
+
+/* --- Newsletter Signup --- */
+.newsletter-signup {
+    background: var(--bg-main);
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.newsletter-signup h3 {
+    color: var(--accent-soft);
+}
+
+.newsletter-signup p {
+    color: var(--text-muted);
+    margin-bottom: 25px;
+}
+
+.newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form input[type="email"] {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border-radius: 999px;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+}
+
+.newsletter-form .btn-primary {
+    width: auto;
+    padding: 10px 20px;
+    margin-top: 0;
+    text-transform: capitalize;
+}
+
+
+/* --- Window Components --- */
+/* ======================================================= */
+/* --- CHAT PLUGIN STYLES (Includes aesthetic fixes) --- */
+/* ======================================================= */
+
+#chat-plugin-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+}
+
+/* --- Floating Launcher Button --- */
+#chat-launcher {
+    background-color: var(--accent); /* Rich Sienna/Crust Brown */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+}
+#chat-launcher:hover {
+    background-color: #8B4513;
+}
+
+/* --- Chat Window --- */
+#chat-window {
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    /* FIX: Essential for vertical alignment */
+    display: flex;
+    flex-direction: column; 
+    overflow: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- Window Components --- */
+.chat-header {
+    background-color: var(--accent);
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chat-header h3 {
+    margin: 0;
+    font-size: 1em;
+}
+.chat-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* --- Chat Body (Messages) */
+.chat-body {
+    /* FIX: Message area takes up all remaining vertical space */
+    flex-grow: 1; 
+    background-color: #fcfcfc; /* Slight off-white background */
+    padding: 10px;
+    overflow-y: auto; /* Enables scrolling for messages */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Text Contrast Fixes */
+.chat-body p {
+    color: var(--bg-main);
+    font-size: 0.9em;
+    padding-bottom: 5px;
+}
+.chat-message {
+    padding: 8px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    max-width: 80%;
+    /* Ensure text wraps correctly */
+    line-height: 1.4;
+}
+
+.chat-message .message-bubble { display:flex; flex-direction:column; }
+.chat-message .message-text { margin: 0 0 6px 0; }
+.message-time { font-size: 0.72rem; color: rgba(0,0,0,0.45); }
+
+/* States for sent messages */
+.chat-message.sent.pending { opacity: 0.85; }
+.chat-message.sent.delivered { box-shadow: 0 6px 18px rgba(34,139,34,0.06); }
+.chat-message.sent.failed { border: 1px solid #e76c6c; }
+
+/* Message from the Agent (Received) */
+.received {
+    /* Aligned left */
+    background-color: #eee;
+    color: var(--bg-main); /* Deep dark text for contrast */
+    align-self: flex-start;
+}
+
+/* Message from the User (Sent) - FIX IS HERE */
+.sent {
+    /* Aligned right */
+    background-color: var(--accent); /* Rich Sienna/Crust Brown */
+    color: white; /* White text for contrast on accent color */
+    align-self: flex-end;
+}
+
+.chat-input {
+    display: flex; /* Aligns input and button horizontally */
+    padding: 10px;
+    border-top: 1px solid #ddd; /* Separator line */
+    background-color: #fff; /* White background for the input area */
+}
+
+#chat-input-field {
+    flex-grow: 1; /* Input field takes up most of the space */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 8px; /* Space between input and button */
+    font-size: 0.9em;
+    outline: none;
+    color: var(--bg-main); /* Dark text for contrast */
+}
+
+.chat-input button {
+    /* Use the accent color for the button */
+    background-color: var(--accent); 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.chat-input button:hover {
+    background-color: #8B4513; /* Darker Sienna */
+}
+/* Alert styles consolidated earlier in the file to avoid duplicates */
+
+/* ====================================
+   B. Shop Page Styles (for shop.php)
+   ==================================== */
+
+.page-content {
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
+/* Ensure shop and bestsellers pages have the same top spacing as About/Contact */
+.shop-content,
+.bestsellers-content {
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
+.page-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.page-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1em;
+    margin-top: -10px;
+    margin-bottom: 30px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 30px auto;
+    width: 50%;
+}
+
+/* --- Shop Header & Search --- */
+.shop-header {
+    /* Match About/Contact: title/subtitle centered, search below */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.shop-header .search-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    max-width: 520px; /* constrain for centered layout */
+}
+
+/* Reduce spacing for the header divider specifically on the Shop page */
+.shop-header hr {
+    margin: 8px auto 20px; /* smaller top margin so it sits closer to the subtitle */
+    width: 50%;
+    border-top: 1px solid var(--border-color);
+}
+
+.shop-header .search-form input[type="text"] {
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--input-bg);
+    color: var(--text-main);
+    outline: none;
+    min-width: 220px;
+    transition: box-shadow 0.15s, border-color 0.15s;
+    flex: 1;
+}
+
+.shop-header .search-form input[type="text"]:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(160,82,45,0.08);
+}
+
+.shop-header .search-form button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, var(--accent) 0%, #D2B48C 100%);
+    color: #120f08;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.shop-header .search-form button:hover {
+    opacity: 0.95;
+}
+
+@media (max-width: 800px) {
+    .shop-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .shop-header .search-form {
+        width: 100%;
+    }
+
+    .shop-header .search-form input[type="text"] {
+        min-width: 0;
+    }
+}
+
+/* Shop Grid Layout (for all products) */
+.shop-page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    margin-block: 30px; /* space above and below the product grid */
+}
+
+/* Enhancing the product card for the shop page */
+.shop-page-grid .product-card {
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.shop-page-grid .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Match the card sizing from the index previews */
+.shop-page-grid .product-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 360px;
+    margin: 10px 0; /* Add vertical spacing between rows */
+}
+
+.shop-page-grid .product-image {
+    height: 180px;
+    object-fit: cover;
+}
+
+@media (max-width: 600px) {
+    .shop-page-grid .product-card { min-height: auto; }
+    .shop-page-grid .product-image { height: auto; }
+}
+
+/* Bestsellers page should visually match index/shop cards */
+.bestsellers-page-grid .product-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 360px;
+    margin: 10px 0; /* Add vertical spacing between rows */
+}
+.bestsellers-page-grid .product-image {
+    height: 180px;
+    object-fit: cover;
+}
+
+@media (max-width: 600px) {
+    .bestsellers-page-grid .product-card { min-height: auto; }
+    .bestsellers-page-grid .product-image { height: auto; }
+}
+
+
+
+.product-details {
+    padding: 15px;
+}
+
+.product-details .description {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    margin-top: 5px;
+    margin-bottom: 15px;
+    height: 40px; /* Ensures card height uniformity */
+    overflow: hidden;
+}
+
+.price-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.price-action .price {
+    font-size: 1.3em;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+/* Cart Badge for Header (requires font awesome for shopping cart icon) */
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: var(--danger-color); /* Use a strong color for attention */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7em;
+    line-height: 1;
+}
+
+/* ====================================
+   About Us Page Layout
+   ==================================== */
+.story-mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.about-image {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-image .responsive-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.about-text h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+/* Team Section */
+.team-section {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.team-member {
+    text-align: center;
+}
+
+.team-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid var(--secondary-color);
+}
+
+/* ====================================
+   Social Share Buttons
+   ==================================== */
+.social-share-section {
+    text-align: center;
+    padding: 50px 0;
+    margin-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.social-share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.share-btn i {
+    margin-right: 8px;
+}
+
+/* Color schemes for social media */
+.facebook-btn {
+    background-color: #1877F2;
+}
+
+.twitter-btn {
+    background-color: #1DA1F2;
+}
+
+.linkedin-btn {
+    background-color: #0A66C2;
+}
+
+.email-btn {
+    background-color: #DD4B39; /* Use a common Google/Red color for email */
+}
+
+.facebook-btn:hover { background-color: #166FE5; }
+.twitter-btn:hover { background-color: #1A92DA; }
+.linkedin-btn:hover { background-color: #075FAD; }
+.email-btn:hover { background-color: #C53B2A; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .story-mission-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+/* ====================================
+   Contact Page Layout
+   ==================================== */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Info on left, Form on right */
+    gap: 50px;
+    margin-bottom: 60px;
+}
+
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* Stack on smaller screens */
+    }
+}
+
+/* Contact Info Styling */
+.contact-info h2 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    border-left: 3px solid var(--secondary-color);
+    padding-left: 15px;
+}
+
+.info-item i {
+    font-size: 1.5em;
+    color: var(--secondary-color);
+    margin-right: 15px;
+    padding-top: 5px;
+}
+
+.info-item h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    color: var(--text-main);
+}
+
+.info-item p {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
+
+/* Contact Form Styling (reusing existing form-group if available) */
+.contact-form-container h2 {
+    color: var(--primary-color);
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Map Section Styling */
+.map-section {
+    margin-top: 40px;
+    padding: 20px 0;
+}
+
+.map-section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+}
+
+.map-container {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.map-container iframe {
+    /* Ensures the iframe is responsive within its container */
+    display: block;
+}
+
+.checkout-page {
+    /* Reusing the .container class's max-width for consistency */
+    width: min(1000px, 92%); 
+    margin: 40px auto 80px auto;
+    flex-grow: 1;
+}
+
+.checkout-page h2 {
+    /* Inherit the existing H2 style from homepage.php, but align left */
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.checkout-page h3 {
+    /* New style for the section headings */
+    color: var(--accent); /* Rich Sienna/Crust Brown */
+    font-size: 0.95em;
+    color: var(--text-muted);
+    margin-top: 8px;
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+} /* <-- MISSING CLOSING BRACE WAS HERE (Line 1047 in the original) */
+
+/* Two-Column Layout for Checkout */
+.checkout-layout-grid {
+    display: grid;
+    /* Order Summary on the right (1fr), Form on the left (2fr) */
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.product-image {
+    transition: transform 0.25s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.03);
+}
+
+@media (max-width: 900px) {
+    .checkout-layout-grid {
+        /* Stack columns on smaller screens */
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Checkout Form Container --- */
+.checkout-form {
+    background: var(--box-bg);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.billing-form p {
+    margin-bottom: 15px; /* Use <p> instead of .form-group */
+}
+
+/* Reusing existing input styles, just need to style <select> */
+.billing-form select {
+    width: 100%;
+    padding: 12px 15px;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    /* Fix: Appearance for dark mode */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23F5DEB3'%3e%3cpath d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+}
+
+.billing-form select:focus {
+    border-color: var(--accent-soft);
+    box-shadow: 0 0 0 1px var(--accent);
+}
+
+.checkout-note {
+    font-size: 0.85em;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 10px;
+    background: rgba(160, 82, 45, 0.1);
+    border-radius: 8px;
+}
+
+.place-order-button {
+    /* Override .btn-primary for specific styling/placement */
+    width: 100%;
+    padding: 15px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, var(--accent) 0%, #D2B48C 100%);
+    color: #120f08;
+    font-weight: 700;
+    font-size: 16px; /* Slightly larger for checkout */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.place-order-button:hover {
+    opacity: 0.9;
+}
+
+
+/* --- Checkout Summary Container --- */
+.checkout-summary {
+    /* Reuses the styling from cart-summary for consistency */
+    background: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    height: fit-content;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.checkout-summary h3 {
+    color: var(--accent-soft);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+/* Individual items in the summary */
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 0.95em;
+    color: var(--text-main);
+}
+
+.summary-item .item-name {
+    color: var(--text-muted);
+}
+
+.summary-item .item-price {
+    font-weight: 500;
+}
+
+.checkout-summary hr {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 15px 0;
+    width: 100%; /* Full width divider */
+}
+
+/* Reusing .summary-line and .total-line from C. Shopping Cart Styles */
+.checkout-summary .summary-line {
+    padding: 8px 0;
+}
+
+.checkout-summary .total-line {
+    border-top: 2px solid var(--accent);
+    margin-top: 15px;
+    padding-top: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.checkout-summary .grand-total-value {
+    color: var(--accent);
+    font-size: 1.3em;
+}
+
+
+/* The main content structure for checkout-page */
+.checkout-page main {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Footer --- */
+.main-footer {
+    width: 100%;
+    background: var(--box-bg);
+    padding: 40px 0 20px 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.footer-col h4 {
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 8px;
+}
+
+.footer-col a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.footer-col a:hover {
+    color: var(--accent-soft);
+}
+
+.footer-col p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+.social-links a {
+    font-size: 1.2rem;
+    margin-right: 15px;
+    color: var(--accent-soft);
+}
+
+.social-links a:hover {
+    color: var(--accent);
+}
+
+/* --- Profile Specific Styles (CORRECTED FOR DARK THEME) --- */
+
+.profile-section h2 {
+    color: var(--accent-soft); 
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 10px;
+}
+
+.profile-card {
+    background: var(--box-bg); 
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.profile-detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color); 
+}
+
+.profile-detail:last-child {
+    border-bottom: none;
+}
+
+.profile-detail label {
+    font-weight: bold;
+    color: var(--text-muted); 
+    flex-basis: 30%;
+    text-transform: none; 
+    letter-spacing: normal;
+    font-size: 14px;
+}
+
+.profile-detail span {
+    color: var(--text-main); 
+    flex-basis: 70%;
+    text-align: right;
+    font-size: 14px;
+}
+
+.profile-actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.profile-actions a {
+    margin: 0 5px;
+}
+
+.profile-history {
+    background: rgba(44, 26, 13, 0.5); 
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-history h3 {
+    margin-top: 0;
+    color: var(--accent-soft); 
+}
+
+.profile-history p {
+    color: var(--text-muted); 
+}
+
+/* --- Error/Debug Styles (Defined in profile.php, but kept here for completeness) --- */
+
+.debug-box {
+    /* Style is mostly inline in profile.php's <style> block, */
+    /* but we can override/enhance it here */
+    background-color: #fdd !important; /* light red */
+    border: 1px solid #f00 !important; /* red */
+    color: #800000 !important; /* dark red text */
+    font-family: monospace !important;
+}
+
+.error-message {
+    color: #dc3545;
+    text-align: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* ====================================
+   C. Shopping Cart Styles (for cart.php)
+   ==================================== */
+
+.cart-container {
+    /* Set up a two-column grid for cart items and summary */
+    display: grid;
+    grid-template-columns: 2fr 1fr; 
+    gap: 40px;
+    padding-top: 40px;
+}
+
+@media (max-width: 900px) {
+    .cart-container {
+        /* Stack the columns on smaller screens */
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Cart Item List --- */
+.cart-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-item {
+    background: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.item-image {
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--accent); /* Placeholder color */
+}
+
+.item-info {
+    flex-grow: 1;
+}
+
+.item-info h4 {
+    color: var(--accent-soft);
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.item-price {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty-input {
+    width: 60px;
+    padding: 5px 8px;
+    text-align: center;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: 4px;
+}
+
+.item-subtotal {
+    text-align: right;
+    min-width: 100px; /* Ensure subtotal column maintains width */
+}
+
+.item-subtotal p {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
+.subtotal-amount {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--accent);
+    margin: 5px 0 10px 0 !important;
+}
+
+.remove-link {
+    color: #f87171; /* A danger red color */
+    text-decoration: none;
+    font-size: 0.85em;
+    transition: color 0.2s;
+}
+
+.remove-link:hover {
+    color: #dc2626;
+}
+
+.cart-actions-bottom {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.cart-actions-bottom .btn-tertiary {
+    width: auto;
+    padding: 10px 20px;
+    margin-top: 0;
+}
+
+/* --- Cart Summary --- */
+.cart-summary {
+    background: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    height: fit-content; /* Only take up necessary height */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.cart-summary h3 {
+    color: var(--accent-soft);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 1em;
+    color: var(--text-main);
+}
+
+.total-line {
+    border-top: 2px solid var(--accent);
+    margin-top: 15px;
+    padding-top: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.grand-total-value {
+    color: var(--accent);
+    font-size: 1.3em;
+}
+
+.cart-summary .btn-primary {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.security-note {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.8em;
+    color: var(--text-muted);
+}
+
+.empty-cart-message {
+    text-align: center;
+    padding: 50px;
+    background: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin: 50px auto;
+}
+
+.empty-cart-message p {
+    font-size: 1.1em;
+    color: var(--accent-soft);
+    margin-bottom: 25px;
+}
+
+.empty-cart-message .btn-primary {
+    width: auto;
+    display: inline-block;
+    padding: 12px 24px;
+}
+
+.cart-actions-bottom .btn-secondary,
+.cart-actions-bottom .btn-danger {
+    width: auto;
+    padding: 10px 20px;
+    margin-top: 0;
+}
+
+/* ====================================
+   D. Order Confirmation Styles (for confirmation.php)
+   ==================================== */
+
+.confirmation-section {
+    padding: 60px 0 100px 0;
+    text-align: center; /* Center everything within the section */
+}
+
+.confirmation-container {
+    width: min(700px, 92%); /* Make the container narrower than the main .container */
+    margin: 0 auto;
+    background: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.confirmation-icon {
+    font-size: 4rem;
+    color: var(--accent); /* Rich Sienna/Crust Brown */
+    margin-bottom: 20px;
+}
+
+.confirmation-container .page-title {
+    /* Override existing h2 style for confirmation page */
+    color: var(--accent-soft); 
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.confirmation-message {
+    font-size: 1.1em;
+    color: var(--text-main);
+    margin-bottom: 30px;
+}
+
+/* Order Summary Box */
+.order-summary-box {
+    background: rgba(160, 82, 45, 0.1); /* Light crust brown background */
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.order-summary-box h3 {
+    color: var(--accent-soft);
+    font-size: 1.4rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 1em;
+}
+
+.summary-line .label {
+    color: var(--text-muted);
+}
+
+.summary-line .value {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.total-line {
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--accent-soft); /* Ensure total label is bright */
+}
+
+/* Specific styling for the final charged amount */
+.grand-total-value {
+    color: var(--accent); /* Rich Sienna/Crust Brown for emphasis */
+    font-size: 1.4em;
+    font-weight: 700;
+}
+
+.delivery-note {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+/* Action Buttons */
+.next-steps-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.next-steps-actions a {
+    /* Override global button width/margin for inline display */
+    width: auto;
+    margin: 0;
+    text-align: center;
+    padding: 12px 30px;
+}
+
+/* Ensure the secondary button is styled correctly as an outline button */
+.next-steps-actions .btn-secondary {
+    /* Reusing the general .btn-secondary styles but adjusting padding for consistency */
+    display: inline-block;
+    padding: 12px 30px;
+    /* The core styling is in the general .btn-secondary block */
+}
+
+@media (max-width: 600px) {
+    .confirmation-container {
+        padding: 30px 20px;
+    }
+    .confirmation-icon {
+        font-size: 3rem;
+    }
+    .next-steps-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .next-steps-actions a {
+        width: 100%;
+    }
+}
+
+/* ====================================
+   E. Account Dashboard Styles (for account.php)
+   ==================================== */
+
+.account-dashboard {
+    /* Standard padding for the main content area */
+    padding: 60px 0 100px 0;
+}
+
+.welcome-header {
+    /* Style for the H1/P greeting at the top */
+    color: var(--accent-soft);
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    text-align: center; /* Center the welcome text */
+}
+
+.welcome-header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.welcome-header p {
+    color: var(--text-muted);
+    font-size: 1.1em;
+    margin-top: 5px;
+}
+
+/* Order History List Grid */
+.order-history-list {
+    /* Responsive grid for order cards: min width 300px, max 2 columns on wide screens */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Individual Order Card */
+.order-card {
+    background: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Order Card Header and Status */
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.order-header h3 {
+    font-size: 1.2rem;
+    color: var(--accent-soft);
+    margin: 0;
+}
+
+.order-status {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Status Colors - Use distinct colors for visual differentiation */
+.order-status.completed {
+    background-color: rgba(154, 205, 50, 0.2); /* Light Greenish background */
+    color: #9acd32; /* Yellowgreen */
+}
+
+.order-status.pending {
+    background-color: rgba(255, 165, 0, 0.2); /* Light Orange background */
+    color: #ffa500; /* Orange */
+}
+
+.order-status.cancelled {
+    background-color: rgba(220, 20, 60, 0.2); /* Light Crimson background */
+    color: #dc143c; /* Crimson */
+}
+
+/* Details Grid for Order Info */
+.order-details-grid {
+    display: flex; 
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.detail-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95em;
+}
+
+.detail-line .label {
+    color: var(--text-muted);
+}
+
+.detail-line .total-value {
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Items Summary */
+.order-items-summary {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.order-items-summary h4 {
+    font-size: 1em;
+    color: var(--text-main);
+    margin-bottom: 5px;
+}
+
+.order-items-summary ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
+.order-items-summary ul li {
+    line-height: 1.5;
+}
+
+/* Ensure the View Details button is full width inside the card */
+.order-card .view-details-btn {
+    margin-top: 20px;
+    width: 100%; 
+    text-align: center;
+}
+
+/* No Orders Message Styling */
+.no-orders-message {
+    text-align: center;
+    padding: 50px 20px;
+    background: rgba(160, 82, 45, 0.1);
+    border: 1px dashed var(--border-color);
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+@media (max-width: 600px) {
+    .order-history-list {
+        /* Force a single column stack on very small screens */
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 900px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero-image-placeholder {
+        width: 100%;
+        min-height: 250px;
+    }
+
+    .hero-ctas {
+        justify-content: center;
+    }
+    
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .main-nav ul {
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .user-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .btn-secondary {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .usp-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-col h4 {
+        margin-top: 20px;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+    }
+}
