@@ -59,6 +59,8 @@ This project requires the following dependencies:
 
 <div align="center">
 
+<div align="center">
+
 ### Installation
 
 </div>
@@ -82,6 +84,149 @@ Build **Baked-by-the-Crater** from the source and install dependencies:
    ```bash
    composer install
    ```
+
+---
+
+<div align="center">
+
+### Database Setup
+
+</div>
+
+The system uses a **MySQL database** to manage users, products, orders, and administrative data.
+
+**Steps to configure the database:**
+
+1. Create a new MySQL database (e.g., `baked_by_the_crater`).
+
+2. Import the provided SQL file located in the `/database` directory.
+
+3. Update database credentials in the configuration file:
+
+   ```php
+   $host = 'localhost';
+   $dbname = 'baked_by_the_crater';
+   $username = 'root';
+   $password = '';
+   ```
+
+4. Ensure your web server (Apache/Nginx) and MySQL services are running.
+
+The platform also integrates **XML-based data handling** for carts and order tracking, complementing the relational database structure.
+
+---
+
+<div align="center">
+
+### Sample Database Tables
+
+</div>
+
+Below are sample database tables used in the system to support authentication, subscriptions, chat messaging, and administration.
+
+---
+
+#### Users Table
+
+Stores registered user accounts and authentication details.
+
+```sql
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(20),
+    address TEXT,
+    is_verified TINYINT(1) DEFAULT 0,
+    provider VARCHAR(50) DEFAULT 'local',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_login TIMESTAMP NULL
+);
+```
+
+**Fields:**
+
+* `id` – Unique user identifier
+* `email` – User email address
+* `password_hash` – Encrypted password
+* `first_name`, `last_name` – User name details
+* `phone`, `address` – Contact information
+* `is_verified` – Email verification status
+* `provider` – Authentication provider (local / Google)
+* `created_at`, `last_login` – Account timestamps
+
+---
+
+#### Subscribers Table
+
+Stores email subscribers for newsletters and promotions.
+
+```sql
+CREATE TABLE subscribers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**Fields:**
+
+* `id` – Subscriber identifier
+* `email` – Subscriber email address
+* `subscribed_at` – Subscription date
+
+---
+
+#### Full_Texts (Chat Messages) Table
+
+Handles real-time chat messages between admins and customers.
+
+```sql
+CREATE TABLE full_texts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    message_text TEXT,
+    sender_type ENUM('admin', 'customer') NOT NULL,
+    message_type ENUM('text', 'file') DEFAULT 'text',
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+```
+
+**Fields:**
+
+* `id` – Message identifier
+* `user_id` – Related user
+* `message_text` – Chat message content
+* `sender_type` – Sender role (admin or customer)
+* `message_type` – Message format (text or file)
+* `timestamp` – Message time
+
+---
+
+#### Admins Table
+
+Stores administrative user credentials and access control data.
+
+```sql
+CREATE TABLE admins (
+    admin_id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    name VARCHAR(150) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**Fields:**
+
+* `admin_id` – Admin identifier
+* `email` – Admin login email
+* `password` – Encrypted admin password
+* `name` – Administrator name
+* `created_at` – Account creation timestamp
 
 ---
 
