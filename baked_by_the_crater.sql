@@ -34,6 +34,9 @@ CREATE TABLE admins (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
+INSERT INTO admins (email, password, name)
+VALUES ('admin@bakedcrater.com', SHA1('admin123'), 'System Administrator');
+
 -- ---------------------------------------------
 -- Table: subscribers
 -- ---------------------------------------------
