@@ -55,7 +55,7 @@ $active_page = 'contact'; // Used in header.php for navigation styling
 
 
 // NOTE: You must have 'db.php', 'header.php', and 'footer.php' files available for this to work.
-// include 'header.php'; 
+include 'header.php'; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -160,7 +160,7 @@ $active_page = 'contact'; // Used in header.php for navigation styling
             </div>  
         </section>
 
-    </main>
-
-    </body>
+<?php 
+include 'footer.php'; // Assumes this closes the HTML document
+?>
 </html>
