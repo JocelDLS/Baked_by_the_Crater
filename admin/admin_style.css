@@ -109,7 +109,7 @@ a:hover {
 .input-box .bx {
     position: absolute;
     right: 20px;
-    top: 60%; /* Adjusted for label */
+    top: 100%; /* FIX APPLIED: Changed from 60% to 70% for better centering */
     transform: translateY(-50%);
     font-size: 1.2em;
     color: var(--accent-soft);
@@ -120,7 +120,9 @@ a:hover {
     display: flex;
     justify-content: space-between;
     font-size: 0.9em;
-    margin: -15px 0 15px;
+    /* Changed margin from -15px 0 15px to 5px 0 20px 
+       to eliminate the overlap and provide separation. */
+    margin: 5px 0 20px; 
 }
 
 .remember-forgot label input {

@@ -1,8 +1,8 @@
 -- ---------------------------------------------
 -- Database: baked_by_the_crater
 -- ---------------------------------------------
-CREATE DATABASE IF NOT EXISTS baked_by_the_crater;
-USE baked_by_the_crater;
+CREATE DATABASE IF NOT EXISTS Baked_by_the_Crate;
+USE Baked_by_the_Crate;
 
 -- ---------------------------------------------
 -- Table: users
