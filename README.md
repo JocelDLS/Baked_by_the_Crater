@@ -1,10 +1,12 @@
 <div align="center">
 
+<img src="images/BakedByTheCrater.png" alt="Baked-by-the-Crater Logo" width="120" />
+
 # **BAKED-BY-THE-CRATER**
 
 *Bake Innovation Into Every Slice of Success*
 
-<!-- Badges -->
+Built with the tools and technologies
 
 ![PHP](https://img.shields.io/badge/PHP-8%2B-blue)
 ![Composer](https://img.shields.io/badge/Composer-Required-orange)
